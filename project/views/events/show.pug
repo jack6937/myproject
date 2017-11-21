@@ -1,0 +1,59 @@
+extends ../layout
+
+block content
+  .container
+    h1.main-title= event.title
+
+    .event.show
+      
+      .form-group
+        label(for="event") event
+        .form-control(name="content", rows="5")= event.content
+      .form-group
+        label(for="location") location
+        .form-control(type="text", name="location", placeholder="Where is the place?", value=event.location)= event.location
+      .form-group
+        label(for="start") start
+        .form-control(type="text", name="start", placeholder="What time does it start?", value=event.start)= event.start
+      .form-group
+        label(for="finish") finish
+        .form-control(type="text", name="finish", placeholder="What time does it finish?", value=event.finish)= event.finish
+      .form-group
+        label(for="host") Host
+        .form-control(type="text", name="host", placeholder="who are you?", value=event.host)= event.host
+      .form-group
+        label(for="hostcontent") 조직 설명
+        .form-control(name="hostcontent", rows="5")= event.hostcontent
+     
+        
+      include _event
+
+      .buttons
+        button.btn.btn-primary #[i.fa.fa-thumbs-up] Like
+        | 
+        a.btn.btn-outline-secondary(href=`/events/${event.id}/edit`) Edit
+        | 
+        a.btn.btn-outline-danger.delete-btn(href="#", data-url=`/events/${event.id}?_method=delete`) Delete
+      
+    if event.numAnswers > 0
+      hr
+      h3 #{event.numAnswers} Answer(s)
+      .answers.show
+        each answer in answers
+          include _answer
+
+    form(action=`/events/${event.id}/answers`, method='POST')
+      .form-group
+        label(for='answer') Your Answer
+        textarea.form-control(name="content", rows="5")
+      button.btn.btn-primary(type="submit") Post Your Answer
+
+  script.
+    $(function() {
+      $('.delete-btn').click(function() {
+        if (confirm('Are you sure to delete?')) {
+          location = $(this).data('url');
+        }
+        return false;
+      });
+    });

@@ -1,0 +1,24 @@
+.form-group
+  label(for="title") Title
+  input.form-control(type="text", name="title", placeholder="What's your event?", value=event.title)
+.form-group
+  label(for="event") event
+  textarea.form-control(name="content", rows="5")= event.content
+.form-group
+  label(for="location") location
+  input.form-control(type="text", name="location", placeholder="Where is the place?", value=event.location)
+.form-group
+  label(for="start") start
+  input.form-control(type="text", name="start", placeholder="What time does it start?", value=event.start)
+.form-group
+  label(for="finish") finish
+  input.form-control(type="text", name="finish", placeholder="What time does it finish?", value=event.finish)
+.form-group
+  label(for="eventhost") Host
+  input.form-control(type="text", name="host", placeholder="who are you?", value=event.host)
+.form-group
+  label(for="hostcontent") 조직 설명
+  textarea.form-control(name="hostcontent", rows="5")= event.hostcontent
+.form-group
+  label(for="tags") Tags
+  input.form-control(type="text", name="tags", placeholder="tags separated by spaces", value=event.tags ? event.tags.join(" ") : "")
