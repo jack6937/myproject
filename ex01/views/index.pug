@@ -21,26 +21,9 @@ block content
               .jumbotron
                 .container
                   h3.display-3 Find your next experience
-                  form
-                    .form-row
-                      .col-md-3
-                        input#consumer-header-event-search.form-control(name="q" type="text" placeholder="Search events or categories" autocomplete="off" spellcheck="false" title="Search events or categories")
-                     
-                      .col-md-3
-                        input#consumer-header-event-location.form-control(name="loc" type="text"  placeholder="City or location" autocomplete="off"   spellcheck="false" value="Seongnam-si, Republic of Korea" title="Enter city or location")
-                     
-                      .col-md-3
-                        select#consumer-header-date-range.form-control(name="date")
-                            option(value="dates") All Dates
-                            option(value="today") Today
-                            option(value="tomorrow") Tomorrow
-                            option(value="this_week") This Week
-                            option(value="this_weekend") This Weekend
-                            option(value="next_week") Next Week
-                            option(value="next_month") Next Month
-                            
-                  
-                      button(type="button").btn.btn-search SEARCH
+                     form.form-inline.search-input-group(action='/questions', method='GET')
+                         i.fa.fa-search
+                         input.form-control.mr-sm-2(type='text', name='term', placeholder='Search', aria-label='Search', value=term)
               .card-deck
                 .card
                     img.card-img-top(src="/images/banner2.jpg" alt="Card image cap")
@@ -108,10 +91,4 @@ block content
                         p.card-text This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.                      
                     .card-footer
                         small.text-muted Last updated 3 mins ago
-                      
-                    
-                  
-                  
-                      
-                  
-        
+                

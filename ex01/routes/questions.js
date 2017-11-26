@@ -1,6 +1,5 @@
 const express = require('express');
 const Question = require('../models/question');
-const User = require('../models/user'); 
 const Answer = require('../models/answer'); 
 const catchErrors = require('../lib/async-error');
 
@@ -8,12 +7,12 @@ const router = express.Router();
 
 // 동일한 코드가 users.js에도 있습니다. 이것은 나중에 수정합시다.
 function needAuth(req, res, next) {
-    if (req.session.user) {
-      next();
-    } else {
-      req.flash('danger', 'Please signin first.');
-      res.redirect('/signin');
-    }
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    req.flash('danger', 'Please signin first.');
+    res.redirect('/signin');
+  }
 }
 
 /* GET questions listing. */
@@ -34,7 +33,7 @@ router.get('/', catchErrors(async (req, res, next) => {
     populate: 'author', 
     page: page, limit: limit
   });
-  res.render('questions/index', {questions: questions, query: req.query});
+  res.render('questions/index', {questions: questions, term: term, query: req.query});
 }));
 
 router.get('/new', needAuth, (req, res, next) => {
@@ -50,6 +49,7 @@ router.get('/:id', catchErrors(async (req, res, next) => {
   const question = await Question.findById(req.params.id).populate('author');
   const answers = await Answer.find({question: question.id}).populate('author');
   question.numReads++;    // TODO: 동일한 사람이 본 경우에 Read가 증가하지 않도록???
+
   await question.save();
   res.render('questions/show', {question: question, answers: answers});
 }));
@@ -63,6 +63,13 @@ router.put('/:id', catchErrors(async (req, res, next) => {
   }
   question.title = req.body.title;
   question.content = req.body.content;
+  question.sort = req.body.sort;
+  question.field = req.body.field;
+  question.location = req.body.location;
+  question.start = req.body.start;
+  question.finish = req.body.finish;
+  question.host = req.body.host;
+  question.hostcontent = req.body.hostcontent
   question.tags = req.body.tags.split(" ").map(e => e.trim());
 
   await question.save();
@@ -77,11 +84,19 @@ router.delete('/:id', needAuth, catchErrors(async (req, res, next) => {
 }));
 
 router.post('/', needAuth, catchErrors(async (req, res, next) => {
-  const user = req.session.user;
+  const user = req.user;
   var question = new Question({
     title: req.body.title,
     author: user._id,
     content: req.body.content,
+    sort: req.body.sort,
+    field: req.body.field,
+    location: req.body.location,
+    start: req.body.start,
+    finish: req.body.finish,
+    host: req.body.host,
+    price: req.body.price,
+    hostcontent: req.body.hostcontent,
     tags: req.body.tags.split(" ").map(e => e.trim()),
   });
   await question.save();
@@ -90,11 +105,11 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
 }));
 
 router.post('/:id/answers', needAuth, catchErrors(async (req, res, next) => {
-  const user = req.session.user;
+  const user = req.user;
   const question = await Question.findById(req.params.id);
 
   if (!question) {
-    req.flash('danger', 'Not exist question');
+    req.flash('danger', 'Not exist event');
     return res.redirect('back');
   }
 
