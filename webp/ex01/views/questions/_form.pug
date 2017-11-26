@@ -1,0 +1,61 @@
+.form-group
+  label(for="title") Title
+  input.form-control(type="text", name="title", placeholder="What's your question?", value=question.title)
+.form-group
+  label(for="question") Detail
+  textarea.form-control(name="content", rows="5")
+.form-group
+ label(for="sort") Category
+ select.form-control(name="sort", rows="1", value=question.sort )
+        .choose-Sort
+          option(value="Conference", name="sort") Conference
+          option(value="Networking ", name="sort") Networking
+          option(value="seminar ", name="sort") seminar
+          option(value="Gala", name="sort") Gala
+          option(value="class ", name="sort") class
+          option(value="Conference", name="sort") Conference 
+          option(value="Convention ", name="sort") Convention 
+    
+.form-group   
+      label(for="field") Event Type
+      select.form-control(name="field", rows="1", value=question.field)
+        .choose-Field
+          option(value="Business", name="field") Business
+          option(value="Science & Tech", name="field") Science &amp; Tech
+          option(value="Government", name="field") Government
+          option(value="Holiday", name="field") Holiday
+          option(value="Other", name="field") Other
+.form-group
+  .row
+    .col-md-2
+      .charge_free
+        label(for="charge") 무료
+        input(type="radio", name="charge", value="free")
+    .col-md-2
+      .charge_incharge
+        label(for="charge") 유료
+        input(type="radio", name="charge", value="in charge")
+    .col-md-2
+      .participate_price
+        label(for="price")  참가 비용
+        textarea.form-control(name="price", rows="1")= question.price
+.form-group     
+  label(for="location") Location
+  input.form-control(type="text", name="location", placeholder="Where is the place?", value=question.location)
+.form-group
+  .row
+    .col-md-2
+      label(for="start") Start
+      input.form-control(type="text", name="start", placeholder="What time does it start?", value=question.start)
+    .col-md-2
+      label(for="finish") Finish
+      input.form-control(type="text", name="finish", placeholder="What time does it finish?", value=question.finish)
+.form-group
+  label(for="questionhost") Organize
+  input.form-control(type="text", name="host", placeholder="who are you?", value=question.host)
+.form-group
+  label(for="hostcontent") Organize Explanation
+  textarea.form-control(name="hostcontent", rows="5", value=question.hostcontent)
+.form-group
+  label(for="tags") Tags
+  input.form-control(type="text", name="tags", placeholder="tags separated by spaces", value=question.tags ? question.tags.join(" ") : "")
