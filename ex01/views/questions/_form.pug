@@ -1,11 +1,11 @@
 .form-group
-  label(for="title") Title
+  label(for="title") 이벤트 제목
   input.form-control(type="text", name="title", placeholder="What's your question?", value=question.title)
 .form-group
-  label(for="question") Detail
+  label(for="question") 이벤트 내용
   textarea.form-control(name="content", rows="5")
 .form-group
- label(for="sort") Category
+ label(for="sort") 이벤트 종류
  select.form-control(name="sort", rows="1", value=question.sort )
         .choose-Sort
           option(value="Conference", name="sort") Conference
@@ -17,7 +17,7 @@
           option(value="Convention ", name="sort") Convention 
     
 .form-group   
-      label(for="field") Event Type
+      label(for="field") 이벤트 분야
       select.form-control(name="field", rows="1", value=question.field)
         .choose-Field
           option(value="Business", name="field") Business
@@ -27,6 +27,9 @@
           option(value="Other", name="field") Other
 .form-group
   .row
+    .col-md-2
+      label(for="maximum") 최대 참가 인원
+      input.form-control(type="number", name="maximum", placeholder="-" value=question.maximum)
     .col-md-2
       .charge_free
         label(for="charge") 무료
@@ -40,22 +43,23 @@
         label(for="price")  참가 비용
         textarea.form-control(name="price", rows="1")= question.price
 .form-group     
-  label(for="location") Location
+  label(for="location") 장소
   input.form-control(type="text", name="location", placeholder="Where is the place?", value=question.location)
 .form-group
   .row
     .col-md-2
-      label(for="start") Start
-      input.form-control(type="text", name="start", placeholder="What time does it start?", value=question.start)
+      label(for="start") 시작시간
+      input.form-control(type="time", name="start", placeholder="", value=question.start)
     .col-md-2
-      label(for="finish") Finish
-      input.form-control(type="text", name="finish", placeholder="What time does it finish?", value=question.finish)
+      label(for="finish") 종료시간
+      input.form-control(type="time", name="finish", placeholder="0~24", value=question.finish)
 .form-group
-  label(for="questionhost") Organize
+  label(for="questionhost") 등록 조직 이름
   input.form-control(type="text", name="host", placeholder="who are you?", value=question.host)
 .form-group
-  label(for="hostcontent") Organize Explanation
+  label(for="hostcontent") 등록 조직 설명
   textarea.form-control(name="hostcontent", rows="5", value=question.hostcontent)
+
 .form-group
   label(for="tags") Tags
   input.form-control(type="text", name="tags", placeholder="tags separated by spaces", value=question.tags ? question.tags.join(" ") : "")

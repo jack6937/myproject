@@ -7,8 +7,10 @@
   .col-sm
     .numbers.
       #[span.number.num-likes= question.numLikes] likes,
+      #[span.number.num-join= question.numParticipate] 참가인원 수,
       #[span.number.num-answers= question.numAnswers] answers,
       #[span.number.num-reads= question.numReads] reads
+     
   .col-sm
     .author
       | asked on #{moment(question.createdAt).format('YYYY-MM-DD')}
