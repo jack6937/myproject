@@ -7,16 +7,15 @@ block content
     .question.show
       .form-group
         label(for="question") 이벤트 내용
-        textarea.form-control(name="content", rows="5")= question.content
+        .form-control(name="content", rows="5")= question.content
       .form-group
-        label(for="sort") 이벤트 종류
-        .form-control(name="sort", rows="1" )= question.sort
-      .form-group
-        label(for="field") 이벤트 분야
-        .form-control(name="field", rows="1" )= question.field
-      .form-group
-        label(for="location") 장소
-        .form-control(type="text", name="location", placeholder="Where is the place?", value=question.location)= question.location
+        .row
+            .col-md-4
+              label(for="sort") 이벤트 종류
+              .form-control(name="sort", rows="1" )= question.sort
+            .col-md-4
+              label(for="field") 이벤트 분야
+              .form-control(name="field", rows="1" )= question.field
       .form-group
         .row
           .col-md-1
@@ -30,12 +29,21 @@ block content
           .col-md-2
             label(for="finish") 종료시간
             .form-control(type="text", name="finish", placeholder="What time does it finish?", value=question.finish)= question.finish
+          .col-md-2
+            label(for="location") 장소
+            .form-control(type="text", name="location", placeholder="Where is the place?", value=question.location)= question.location
       .form-group
-        label(for="host") 등록 조직 이름
-        .form-control(type="text", name="host", placeholder="who are you?", value=question.host)= question.host
+        .row
+          .col-md-4
+            label(for="host") 등록 조직 이름
+            .form-control(type="text", name="host", placeholder="who are you?", value=question.host)= question.host
       .form-group
         label(for="hostcontent") 등록 조직 설명
-        textarea.form-control(name="hostcontent", rows="5")= question.hostcontent
+        .form-control(name="hostcontent", rows="5")= question.hostcontent
+      .buttons
+        if currentUser
+          a.btn.btn-outline-warning(href=`/questions/${question.id}/join?_method=post`) 참여신청
+      
       include _question
 
       .buttons
@@ -49,9 +57,7 @@ block content
             a.btn.btn-outline-secondary(href=`/questions/${question.id}/edit`) Edit
             | 
             a.btn.btn-outline-danger.need-confirm-btn(href=`/questions/${question.id}?_method=delete`) Delete
-      .buttons
-        if currentUser
-          a.btn.btn-outline-warning(href=`/questions/${question.id}/join?_method=post`) 참여신청
+      
     if question.numAnswers > 0
       hr
       h3 #{question.numAnswers} Answer(s)

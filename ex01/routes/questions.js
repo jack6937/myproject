@@ -168,29 +168,6 @@ router.post('/', needAuth, catchErrors(async (req, res, next) => {
   res.redirect('/questions');
 }));
 
-router.post('/:id/answers', needAuth, catchErrors(async (req, res, next) => {
-  const user = req.user;
-  const question = await Question.findById(req.params.id);
-
-  if (!question) {
-    req.flash('danger', 'Not exist event');
-    return res.redirect('back');
-  }
-
-  var answer = new Answer({
-    author: user._id,
-    question: question._id,
-    content: req.body.content
-  });
-  await answer.save();
-  question.numAnswers++;
-  await question.save();
-
-  req.flash('success', 'Successfully answered');
-  res.redirect(`/questions/${req.params.id}`);
-}));
-
-//참여신청
 router.post('/:id/join', needAuth, catchErrors(async (req, res, next) => {
   const user = req.user;
   const question = await Question.findById(req.params.id);
@@ -218,6 +195,30 @@ router.post('/:id/join', needAuth, catchErrors(async (req, res, next) => {
   }
   res.redirect('back');
 }));
+
+router.post('/:id/answers', needAuth, catchErrors(async (req, res, next) => {
+  const user = req.user;
+  const question = await Question.findById(req.params.id);
+
+  if (!question) {
+    req.flash('danger', 'Not exist event');
+    return res.redirect('back');
+  }
+
+  var answer = new Answer({
+    author: user._id,
+    question: question._id,
+    content: req.body.content
+  });
+  await answer.save();
+  question.numAnswers++;
+  await question.save();
+
+  req.flash('success', 'Successfully answered');
+  res.redirect(`/questions/${req.params.id}`);
+}));
+
+
 
 
 module.exports = router;
