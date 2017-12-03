@@ -26,6 +26,6 @@ module.exports = (app, passport) => {
   app.get('/signout', (req, res) => {
     req.logout();
     req.flash('success', 'Successfully signed out');
-    res.redirect('/');
+    res.redirect('/signin');
   });
 };
