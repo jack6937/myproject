@@ -57,7 +57,20 @@ block content
             a.btn.btn-outline-secondary(href=`/questions/${question.id}/edit`) Edit
             | 
             a.btn.btn-outline-danger.need-confirm-btn(href=`/questions/${question.id}?_method=delete`) Delete
-      
+            |
+            hr
+      .container#joinlist
+        .form-group
+            label(for="").h3 참가자 명단
+        table.table
+          thead
+            tr
+              th 참가자 이름 
+          tbody
+            each particpant in joinpeople
+              tr
+                td
+                  a #{particpant.author.name}
     if question.numAnswers > 0
       hr
       h3 #{question.numAnswers} Answer(s)
