@@ -103,7 +103,7 @@ router.get('/:id', catchErrors(async (req, res, next) => {
   question.numReads++;    // TODO: 동일한 사람이 본 경우에 Read가 증가하지 않도록???
 
   await question.save();
-  res.render('questions/show', {question: question, answers: answers});
+  res.render('questions/show', {question: question, answers: answers, joinpeople: joinpeople});
 }));
 
 router.put('/:id', catchErrors(async (req, res, next) => {
