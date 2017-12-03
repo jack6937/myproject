@@ -43,8 +43,15 @@ function validateForm(form, options) {
 
 /* GET users listing. */
 router.get('/', needAuth, catchErrors(async (req, res, next) => {
-  const users = await User.find({});
-  res.render('users/index', {users: users});
+  const administrator = req.user._id; 
+  
+  if(administrator=="5a21786bd84c4b47487295b1"){
+    const users = await User.find({});
+    res.render('users/index', {users: users});
+  } else{
+    req.flash('danger', '당신은 관리자가 아닙니다');
+    return res.redirect('back');
+  }
 }));
 
 router.get('/new', (req, res, next) => {
