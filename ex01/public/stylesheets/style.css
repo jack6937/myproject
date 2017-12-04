@@ -164,6 +164,13 @@ form {
     margin-bottom: 0.5em;
     color: #888; }
 
+.container#joinlist {
+  margin-left: 0px;
+  width: 400px; }
+
+.table {
+  background-color: #67c1c7; }
+
 .question-like-btn, .answer-like-btn {
   cursor: pointer; }
   .question-like-btn .for-loading, .answer-like-btn .for-loading {
