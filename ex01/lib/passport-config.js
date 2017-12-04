@@ -26,12 +26,14 @@ module.exports = function(passport) {
       done(err);
     }
   }));
-
+  const callbackURL = (process.env.NODE_ENV == 'production')?
+    'https://secret-sands-77905.herokuapp.com/auth/facebook/callback' :
+    'http://localhost:3000/auth/facebook/callback';
   passport.use(new FacebookStrategy({
     // 이 부분을 여러분 Facebook App의 정보로 수정해야 합니다.
     clientID : '181451632409940',
     clientSecret : '5083bf82d5790bd6fd45baa267196329',
-    callbackURL : 'http://localhost:3000/auth/facebook/callback',
+    callbackURL : callbackURL,
     profileFields : ['email', 'name', 'picture']
   }, async (token, refreshToken, profile, done) => {
     console.log('Facebook', profile); // profile 정보로 뭐가 넘어오나 보자.
