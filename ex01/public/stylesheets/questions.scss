@@ -72,12 +72,10 @@
 .container#joinlist{
   margin-left:0px;
   width: 400px;
-
+  background-color: rgb(179, 247, 213);
   
 }
-.table{
-  background-color: rgb(103, 193, 199);
-}
+
 .question-like-btn, .answer-like-btn {
   .for-loading {display: none;}
   cursor: pointer; 

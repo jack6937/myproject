@@ -177,8 +177,8 @@ router.post('/:id/join', needAuth, catchErrors(async (req, res, next) => {
     req.flash('danger', 'Not exist question');
     return res.redirect('back');
   }
-  var finduser = await Join.findOne({author: req.user._id, question: question._id});//??
-  if (!finduser){//추가
+  var checking = await Join.findOne({author: req.user._id, question: question._id});
+  if (!checking){
     if(question.maximum>question.numParticipate){
       var join = new Join({
         author: user._id,
