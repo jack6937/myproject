@@ -73,11 +73,19 @@ router.get('/', catchErrors(async (req, res, next) => {
 
   var query = {};
   const term = req.query.term;
+  const find = req.query.find;
   if (term) {
-    query = {$or: [
-      {title: {'$regex': term, '$options': 'i'}},
-      {content: {'$regex': term, '$options': 'i'}}
-    ]};
+    if(find == "title"){
+      query = {$or: [ {title: {'$regex': term, '$options': 'i'}} ]};
+    } else if(find == "content"){
+      query = {$or: [ {content: {'$regex': term, '$options': 'i'}} ]};
+    } else if(find == "location"){
+      query = {$or: [ {location: {'$regex': term, '$options': 'i'}} ]};
+    } else if(find == "field"){
+      query = {$or: [ {field: {'$regex': term, '$options': 'i'}} ]};
+    } else if(find == "tags"){
+      query = {$or: [ {tags: {'$regex': term, '$options': 'i'}}  ]};
+    }
   }
   const questions = await Question.paginate(query, {
     sort: {createdAt: -1}, 
