@@ -1,5 +1,6 @@
 const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
+const KakaoStrategy = require('passport-kakao').Strategy;
 const User = require('../models/user');
 
 module.exports = function(passport) {
@@ -61,6 +62,43 @@ module.exports = function(passport) {
         user.facebook.photo = picture;
       }
       user.facebook.token = profile.token;
+      await user.save();
+      return done(null, user);
+    } catch (err) {
+      done(err);
+    }
+  }));
+
+  passport.use('kakao-login',new KakaoStrategy({
+    clientID: '81daea58d4dba3e973aefac7a3fb1008',
+    callbackURL: 'https://secret-sands-77905.herokuapp.com/auth/kakao/callback',
+    profileFields : ['email', 'name', 'picture']
+  }, async (token, refreshToken, profile, done) => {
+  
+    try {
+      var email = (profile.emails && profile.emails[0]) ? profile.emails[0].value : '';
+      var picture = (profile.photos && profile.photos[0]) ? profile.photos[0].value : '';
+      var name = (profile.displayName) ? profile.displayName : 
+        [profile.name.givenName, profile.name.middleName, profile.name.familyName]
+          .filter(e => e).join(' ');
+      console.log(email, picture, name, profile.name);
+      var user = await User.findOne({'kakao.id': profile.id});
+      if (!user) {
+        // 없다면, 혹시 같은 email이라도 가진 사용자가 있나?
+        if (email) {
+          user = await User.findOne({email: email});
+        }
+        if (!user) {
+          // 그것도 없다면 새로 만들어야지.
+          user = new User({name: name});
+          //  카카오톡은 이메일을 제공하지 않는 관계로 실제 카카오이메일을 넣어둠
+          user.email =  email ? email : `jack6937@hanmai.net`;
+        }
+        // kakao id가 없는 사용자는 해당 id를 등록
+        user.kakao.id = profile.id;
+        user.kakao.photo = picture;
+      }
+      user.kakao.token = profile.token;
       await user.save();
       return done(null, user);
     } catch (err) {
