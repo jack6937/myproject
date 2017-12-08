@@ -12,6 +12,18 @@ body {
 a:hover {
   text-decoration: none;
 }
+h3.recentlist{
+  text-align: center;
+}
+
+p.list{
+  margin: 5px;
+  color: brown;
+}
+h6 {
+  text-align: right;
+ 
+}
 
 /*.jumbotron {
   margin-top: -1em;
@@ -20,7 +32,7 @@ a:hover {
   color: #fff;
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }*/
-.carousel-item-active{
+.carousel-item.active{
   height: 400px;
 }
 .jumbotron {
