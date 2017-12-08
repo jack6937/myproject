@@ -7,7 +7,7 @@ block content
     .question.show
       .form-group
         label(for="question") 이벤트 내용
-        .form-control(name="content", rows="5")= question.content
+        .form-control(name="content", rows="5")!= question.content
       .form-group
         .row
             .col-md-4
