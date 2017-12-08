@@ -45,7 +45,7 @@ function validateForm(form, options) {
 router.get('/', needAuth, catchErrors(async (req, res, next) => {
   const administrator = req.user._id; 
   
-  if(administrator=="5a21786bd84c4b47487295b1"){
+  if(administrator=="5a2a436e9a4b8740ecc02b16"){
     const users = await User.find({});
     res.render('users/index', {users: users});
   } else{

@@ -3,7 +3,7 @@
   input.form-control(type="text", name="title", placeholder="What's your question?", value=question.title)
 .form-group
   label(for="question") 이벤트 내용
-  textarea.form-control(name="content", rows="5")
+  textarea#textareas(name="content")
 .form-group
  label(for="sort") 이벤트 종류
  select.form-control(name="sort", rows="1", value=question.sort )
