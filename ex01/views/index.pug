@@ -22,7 +22,6 @@ block content
                 .container
                   h3.display-3 Find your next experience
                       form.form-inline.search-input-group(action='/questions', method='GET')
-                           .col-md-2
                             select.form-control(name="find", rows="1")
                                 .choose-Find
                                 option(value="title", name="find" ) 제목
@@ -30,8 +29,6 @@ block content
                                 option(value="location", name="find" ) 장소
                                 option(value="field", name="find" ) 분야
                                 option(value="tags", name="find" ) 태그 
-                           .col-md-8
-                            i.fa.fa-search
                             input.form-control.mr-sm-2(type='text', name='term', placeholder='Search', aria-label='Search', value=term)
               h3.recentlist 최근 게시된 이벤트 
               .card-deck

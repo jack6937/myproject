@@ -9,9 +9,6 @@ body {
   }
 }
 
-a:hover {
-  text-decoration: none;
-}
 h3.recentlist{
   text-align: center;
 }
@@ -23,6 +20,10 @@ p.list{
 h6 {
   text-align: right;
  
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 /*.jumbotron {
@@ -37,19 +38,31 @@ h6 {
 }
 .jumbotron {
   position: relative;
-  margin-left: 18%;
-  width: 1000px;
-  height: 200px;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 0%;
+  padding-top: 4%;
+  padding-bottom: 2%;
+  width: 80%;
+  height: 10%;
   top: -100px;
   z-index:2;
 }
 .jumbotron .container{
-  width: 800px;
-  height: 200px;
+  width: 80%;
+  height: 10%;
 }
+.jumbotron .container form{
+  margin-top: 2%;
+  margin-bottom: 3%;
+  height: 10%;
+  padding-left: 5%
+}
+
+
 .display-3{
-  padding-left: 15%;
-  font-size: 40px;
+  text-align: center;
+  font-size: 4vw;
 }
 .form-actions {
   padding: 19px 20px 20px;
@@ -88,14 +101,19 @@ form{
   margin: 1em 0;
   width: 100%;
   position: relative;
+  select{
+    width: 20%;
+    height: 10%;
+  }
   input { 
     border-radius: 2em;
     padding-left: 2.5em;
-    width: 100%!important;
+    width: 80%!important;
+    height: 10%
   }
   i {
-    font-size: 1.3em;
-    top: 0.4em;
+    padding-left: 10%;
+    font-size: 3vw;
     color: #bababa;
     position: absolute;
   }
@@ -105,4 +123,9 @@ form{
   margin-left: 17%;
   margin-right: 17%;
   margin-bottom: 2%;
+}
+
+.something{
+  width:100%;
+  height: 40%;
 }
